@@ -67,7 +67,7 @@ body {
   );
 }
 
-/* players */
+/* players cards */
 .players_container {
   display: flex;
   justify-content: center;
@@ -130,4 +130,10 @@ background-image: url("../assets/images/clove_card.jpg");
   background-position: center;
   height: 400px;
   width: 150px;
+}
+
+/* ranks */
+
+.ranks_logo {
+    
 }
