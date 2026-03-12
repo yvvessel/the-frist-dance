@@ -26,7 +26,8 @@ header {
   position: relative;
   padding-top: 120px;
   margin-left: 5%;
-color: rgba(0, 0, 0, 0.822);
+  font-size: x-large;
+  color: rgba(0, 0, 0, 0.822);
 }
 
 nav li {
@@ -71,10 +72,60 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  gap: 15px;
+}
+
+.player_card {
+  height: 400px;
+  width: 150px;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+}
+.player_card_mvp {
+    background-size: cover;
+    background-position: center;
+    height: 420px;
+    width: 170px;
+    transform: scale(1.15);
+    z-index: 2;
+    margin-left: 20px;
+}
+
+.phoenix_card {
+background-image: url("../assets/images/phoenix_card.jpg");
+  background-size: cover;
+  background-position:center ;
+  height: 400px;
+  width: 150px;
+}
+
+.clove_card {
+background-image: url("../assets/images/clove_card.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  width: 150px;
 }
 
 .jett_card {
   background-image: url("../assets/images/jett_card.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  width: 150px;
+}
+
+.viper_card {
+  background-image: url("../assets/images/viper_card.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  width: 150px;
+}
+
+.chamber_card {
+  background-image: url("../assets/images/chamber_card.jpg");
   background-size: cover;
   background-position: center;
   height: 400px;
