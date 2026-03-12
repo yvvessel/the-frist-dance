@@ -133,7 +133,7 @@ background-image: url("../assets/images/clove_card.jpg");
 }
 
 /* ranks */
-
 .ranks_logo {
-    
+  height: auto;
+  width: 50px;
 }
