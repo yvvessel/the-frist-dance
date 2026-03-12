@@ -22,12 +22,11 @@ header {
 }
 
 .overlay {
-  text-align: start;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: rgba(0, 0, 0, 0.822);
+  text-align: center;
+  position: relative;
+  padding-top: 120px;
+  margin-left: 5%;
+color: rgba(0, 0, 0, 0.822);
 }
 
 nav li {
@@ -79,5 +78,5 @@ body {
   background-size: cover;
   background-position: center;
   height: 400px;
-  width: auto;
+  width: 150px;
 }
