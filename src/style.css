@@ -22,7 +22,7 @@ header {
 }
 
 .overlay {
-  text-align: center;
+  text-align: start;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -59,10 +59,25 @@ body {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  background: #f0e4e8;
+  background: radial-gradient(
+    circle,
+    rgba(240, 228, 232, 1) 0%,
+    rgb(231, 138, 109) 100%
+  );
 }
 
+/* players */
 .players_container {
-display: flex;
-justify-content: center;
-align-items: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.jett_card {
+  background-image: url("../assets/images/jett_card.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  width: auto;
 }
