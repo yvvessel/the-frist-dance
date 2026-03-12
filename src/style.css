@@ -62,8 +62,8 @@ body {
   background: #f0e4e8;
   background: radial-gradient(
     circle,
-    rgba(240, 228, 232, 1) 0%,
-    rgb(231, 138, 109) 100%
+    rgb(59, 58, 58) 0%,
+    rgb(20, 20, 20) 100%
   );
 }
 
@@ -87,10 +87,11 @@ body {
     background-position: center;
     height: 420px;
     width: 170px;
+    margin-left: 20px;
     transform: scale(1.15);
     z-index: 2;
-    margin-left: 20px;
 }
+
 
 .phoenix_card {
 background-image: url("../assets/images/phoenix_card.jpg");
@@ -133,7 +134,34 @@ background-image: url("../assets/images/clove_card.jpg");
 }
 
 /* ranks */
-.ranks_logo {
+.rank_logo {
   height: auto;
   width: 50px;
 }
+
+.loader {
+    position: relative;
+    width: 60px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(#FFF 50px, transparent 0),
+                      linear-gradient(#FFF 50px, transparent 0),
+                      linear-gradient(#FFF 50px, transparent 0),
+                      linear-gradient(#FFF 50px, transparent 0),
+                      linear-gradient(#FFF 50px, transparent 0),
+                      linear-gradient(#FFF 50px, transparent 0);
+    background-position: 0px center, 15px center, 30px center, 45px center, 60px center, 75px center, 90px center;
+    animation: rikSpikeRoll 0.65s linear infinite alternate;
+  }
+@keyframes rikSpikeRoll {
+  0% { background-size: 10px 3px;}
+  16% { background-size: 10px 50px, 10px 3px, 10px 3px, 10px 3px, 10px 3px, 10px 3px}
+  33% { background-size: 10px 30px, 10px 50px, 10px 3px, 10px 3px, 10px 3px, 10px 3px}
+  50% { background-size: 10px 10px, 10px 30px, 10px 50px, 10px 3px, 10px 3px, 10px 3px}
+  66% { background-size: 10px 3px, 10px 10px, 10px 30px, 10px 50px, 10px 3px, 10px 3px}
+  83% { background-size: 10px 3px, 10px 3px,  10px 10px, 10px 30px, 10px 50px, 10px 3px}
+  100% { background-size: 10px 3px, 10px 3px, 10px 3px,  10px 10px, 10px 30px, 10px 50px}
+}
+    
+
+    

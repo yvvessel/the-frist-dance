@@ -5,6 +5,10 @@ const cors = require("cors")
 
 const app = express()
 
+app.use(cors())
+
+const API_KEY = process.env.API_KEY
+
 const players = [
   { name: "Xanxes", tag: "SCCP" },
   { name: "Ferazor", tag: "BR1" },
@@ -13,21 +17,15 @@ const players = [
   { name: "T1n Doll", tag: "4328" }
 ]
 
-app.use(cors())
-
-const API_KEY = process.env.API_KEY
-
 app.get("/team", async (req, res) => {
 
   try {
 
-    const results = []
-
-    for (const player of players) {
+    const results = await Promise.all(players.map(async (player) => {
 
       // buscar conta
       const accountResponse = await fetch(
-        `https://api.henrikdev.xyz/valorant/v1/account/${player.name}/${player.tag}`,
+        `https://api.henrikdev.xyz/valorant/v1/account/${encodeURIComponent(player.name)}/${player.tag}`,
         {
           headers: {
             "Authorization": API_KEY
@@ -36,6 +34,15 @@ app.get("/team", async (req, res) => {
       )
 
       const accountData = await accountResponse.json()
+
+      if (!accountData.data) {
+        return {
+          name: player.name,
+          rank: "Unranked",
+          rr: 0
+        }
+      }
+
       const puuid = accountData.data.puuid
 
       // buscar rank
@@ -50,20 +57,31 @@ app.get("/team", async (req, res) => {
 
       const mmrData = await mmrResponse.json()
 
-      results.push({
-        name: player.name,
-        rank: mmrData.data.current.tier.name,
-        rr: mmrData.data.current.rr
-      })
+      const rank = mmrData?.data?.current?.tier?.name || "Unranked"
+      const rr = mmrData?.data?.current?.rr || 0
 
-    }
+      return {
+        name: player.name,
+        rank: rank,
+        rr: rr
+      }
+
+    }))
 
     res.json(results)
 
   } catch (error) {
 
-    res.status(500).json({ error: "Erro ao buscar time" })
+    console.error(error)
+
+    res.status(500).json({
+      error: "Erro ao buscar dados do time"
+    })
 
   }
 
+})
+
+app.listen(3000, () => {
+  console.log("Servidor rodando na porta 3000")
 })
