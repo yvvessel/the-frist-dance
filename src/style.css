@@ -18,8 +18,7 @@ header {
   justify-content: left;
   height: auto;
   width: 50px;
-  padding-top: 20px;
-  border-radius: 15px 15px 15px 15px;
+  border-radius: 50%;
 }
 
 .overlay {
