@@ -1,32 +1,32 @@
 [
- {
-  "nick": "yvv",
-  "riot_id": "yvv",
-  "tag": "YSL",
-  "main_agent": "Jett"
- },
- {
-  "nick": "Tiny Rick",
-  "riot_id": "tinyrick",
-  "tag": "7248",
-  "main_agent": "Chamber"
- },
- {
-  "nick": "Zbiel",
-  "riot_id": "Ferazor",
-  "tag": "BR1",
-  "main_agent": "Phoenix"
- },
- {
-  "nick": "Tin Doll",
-  "riot_id": "T1n Doll",
-  "tag": "4328",
-  "main_agent": "Viper"
- },
- {
-  "nick": "Xanxes",
-  "riot_id": "Xanxes",
-  "tag": "SCCP",
-  "main_agent": "Clove"
- }
+  {
+    "nick": "yvv",
+    "riot_id": "yvv",
+    "tag": "YSL",
+    "main_agent": "Jett"
+  },
+  {
+    "nick": "Tiny Rick",
+    "riot_id": "tinyrick",
+    "tag": "7248",
+    "main_agent": "Chamber"
+  },
+  {
+    "nick": "Zbiel",
+    "riot_id": "Ferazor",
+    "tag": "BR1",
+    "main_agent": "Phoenix"
+  },
+  {
+    "nick": "Tin Doll",
+    "riot_id": "T1n Doll",
+    "tag": "4328",
+    "main_agent": "Viper"
+  },
+  {
+    "nick": "Xanxes",
+    "riot_id": "Xanxes",
+    "tag": "SCCP",
+    "main_agent": "Clove"
+  }
 ]

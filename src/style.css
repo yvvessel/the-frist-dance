@@ -19,6 +19,7 @@ header {
   height: auto;
   width: 50px;
   padding-top: 20px;
+  border-radius: 15px 15px 15px 15px;
 }
 
 .overlay {
@@ -26,6 +27,7 @@ header {
   position: relative;
   padding-top: 120px;
   margin-left: 5%;
+  font-family: "Orbitron", sans-serif;
   font-size: x-large;
   color: rgba(0, 0, 0, 0.822);
 }
@@ -51,6 +53,7 @@ header .menu a {
   margin-right: 17px;
   list-style: none;
   font-size: 17px;
+  font-family: "Rajdhani", sans-serif;
   color: rgb(0, 0, 0);
 }
 
@@ -62,8 +65,8 @@ body {
   background: #f0e4e8;
   background: radial-gradient(
     circle,
-    rgb(59, 58, 58) 0%,
-    rgb(20, 20, 20) 100%
+    rgb(255, 255, 255) 0%,
+    rgb(26, 25, 25) 100%
   );
 }
 
@@ -81,56 +84,68 @@ body {
   background-size: cover;
   background-position: center;
   text-align: center;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
 }
 .player_card_mvp {
-    background-size: cover;
-    background-position: center;
-    height: 420px;
-    width: 170px;
-    margin-left: 20px;
-    transform: scale(1.15);
-    z-index: 2;
+  height: 420px;
+  width: 170px;
+  transform: scale(1.15);
+  z-index: 2;
+  margin-left: 2px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+
+  box-shadow:
+    0 0 15px rgb(197, 156, 44),
+    0 0 35px rgb(197, 156, 44);
 }
 
+.player_card_mvp section {
+  border-radius: 8px;
+  box-shadow:
+    0 0 15px rgba(197, 156, 44, 0.8),
+    0 0 35px rgba(197, 156, 44, 0.6);
+}
 
 .phoenix_card {
-background-image: url("../assets/images/phoenix_card.jpg");
+  background-image: url("../assets/images/phoenix_card.jpg");
   background-size: cover;
-  background-position:center ;
-  height: 400px;
-  width: 150px;
+  background-position: center;
+  height: 100%;
+  width: 100%;
 }
 
 .clove_card {
-background-image: url("../assets/images/clove_card.jpg");
+  background-image: url("../assets/images/clove_card.jpg");
   background-size: cover;
   background-position: center;
-  height: 400px;
-  width: 150px;
+  height: 100%;
+  width: 100%;
 }
 
 .jett_card {
   background-image: url("../assets/images/jett_card.jpg");
   background-size: cover;
   background-position: center;
-  height: 400px;
-  width: 150px;
+  height: 100%;
+  width: 100%;
 }
 
 .viper_card {
   background-image: url("../assets/images/viper_card.jpg");
   background-size: cover;
   background-position: center;
-  height: 400px;
-  width: 150px;
+  height: 100%;
+  width: 100%;
 }
 
 .chamber_card {
   background-image: url("../assets/images/chamber_card.jpg");
   background-size: cover;
   background-position: center;
-  height: 400px;
-  width: 150px;
+  height: 100%;
+  width: 100%;
 }
 
 /* ranks */
@@ -138,30 +153,3 @@ background-image: url("../assets/images/clove_card.jpg");
   height: auto;
   width: 50px;
 }
-
-.loader {
-    position: relative;
-    width: 60px;
-    height: 20px;
-    background-repeat: no-repeat;
-    background-image: linear-gradient(#FFF 50px, transparent 0),
-                      linear-gradient(#FFF 50px, transparent 0),
-                      linear-gradient(#FFF 50px, transparent 0),
-                      linear-gradient(#FFF 50px, transparent 0),
-                      linear-gradient(#FFF 50px, transparent 0),
-                      linear-gradient(#FFF 50px, transparent 0);
-    background-position: 0px center, 15px center, 30px center, 45px center, 60px center, 75px center, 90px center;
-    animation: rikSpikeRoll 0.65s linear infinite alternate;
-  }
-@keyframes rikSpikeRoll {
-  0% { background-size: 10px 3px;}
-  16% { background-size: 10px 50px, 10px 3px, 10px 3px, 10px 3px, 10px 3px, 10px 3px}
-  33% { background-size: 10px 30px, 10px 50px, 10px 3px, 10px 3px, 10px 3px, 10px 3px}
-  50% { background-size: 10px 10px, 10px 30px, 10px 50px, 10px 3px, 10px 3px, 10px 3px}
-  66% { background-size: 10px 3px, 10px 10px, 10px 30px, 10px 50px, 10px 3px, 10px 3px}
-  83% { background-size: 10px 3px, 10px 3px,  10px 10px, 10px 30px, 10px 50px, 10px 3px}
-  100% { background-size: 10px 3px, 10px 3px, 10px 3px,  10px 10px, 10px 30px, 10px 50px}
-}
-    
-
-    
