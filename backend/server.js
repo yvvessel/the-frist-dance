@@ -76,6 +76,102 @@ app.get("/team", async (req, res) => {
   }
 });
 
+//estatisticas
+app.get("/stats", async (req, res) => {
+
+  try {
+
+    const results = await Promise.all(players.map(async (player) => {
+
+      // pegar conta
+      const accountResponse = await fetch(
+        `https://api.henrikdev.xyz/valorant/v1/account/${encodeURIComponent(player.name)}/${player.tag}`,
+        { headers: { "Authorization": API_KEY } }
+      )
+
+      const accountData = await accountResponse.json()
+      const puuid = accountData.data.puuid
+
+      // pegar partidas
+      const matchesResponse = await fetch(
+        `https://api.henrikdev.xyz/valorant/v3/by-puuid/matches/br/pc/${puuid}`,
+        { headers: { "Authorization": API_KEY } }
+      )
+
+      const matchesData = await matchesResponse.json()
+
+      let kills = 0
+      let deaths = 0
+      let assists = 0
+      let headshots = 0
+      let shots = 0
+      let wins = 0
+
+      const agentCount = {}
+
+      matchesData.data.forEach(match => {
+
+        const p = match.players.all_players.find(p => p.name === player.name)
+
+        if(!p) return
+
+        kills += p.stats.kills
+        deaths += p.stats.deaths
+        assists += p.stats.assists
+
+        headshots += p.stats.headshots
+        shots += p.stats.bodyshots + p.stats.headshots + p.stats.legshots
+
+        if(p.team === match.teams.red.has_won || p.team === match.teams.blue.has_won){
+          wins++
+        }
+
+        const agent = p.character
+        agentCount[agent] = (agentCount[agent] || 0) + 1
+
+      })
+
+      const kda = ((kills + assists) / deaths).toFixed(2)
+      const hs = ((headshots / shots) * 100).toFixed(1)
+
+      const main = Object.keys(agentCount).reduce((a,b)=>agentCount[a]>agentCount[b]?a:b)
+
+      const lastMatch = matchesData.data[0]?.metadata?.mode || "Unknown"
+
+      return {
+        name: player.name,
+        kda: Number(kda),
+        hs: Number(hs),
+        main: main,
+        lastMatch: lastMatch,
+        wins: wins
+      }
+
+    }))
+
+    // ordenar por KDA
+    results.sort((a,b)=> b.kda - a.kda)
+
+    // team overview
+    const overview = {
+      mvp: results[0].name,
+      highestKDA: results.reduce((a,b)=>a.kda>b.kda?a:b).name,
+      mostHeadshots: results.reduce((a,b)=>a.hs>b.hs?a:b).name,
+      mostWins: results.reduce((a,b)=>a.wins>b.wins?a:b).name
+    }
+
+    res.json({
+      players: results,
+      teamOverview: overview
+    })
+
+  } catch(err){
+    console.error(err)
+    res.status(500).json({error:"Erro ao gerar stats"})
+  }
+
+})
+
 app.listen(3000, () => {
   console.log("Servidor rodando na porta 3000");
 });

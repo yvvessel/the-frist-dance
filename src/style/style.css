@@ -85,7 +85,14 @@ body {
   text-align: center;
   font-family: "Rajdhani", sans-serif;
   font-weight: 600;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
+.player_card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
 .player_card_mvp {
   height: 420px;
   width: 170px;
@@ -151,4 +158,26 @@ body {
 .rank_logo {
   height: auto;
   width: 50px;
+  transition: filter 0.3s;
 }
+
+.rank-bronze {
+  filter: drop-shadow(0 0 8px #cd7f32);
+}
+
+.rank-silver {
+  filter: drop-shadow(0 0 8px #c0c0c0);
+}
+
+.rank-gold {
+  filter: drop-shadow(0 0 8px #ffd700);
+}
+
+.rank-diamond {
+  filter: drop-shadow(0 0 8px #6a43c7);
+}
+
+.rank-ascendant {
+  filter: drop-shadow(0 0 8px #7eff72);
+}
+

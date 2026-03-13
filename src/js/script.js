@@ -22,6 +22,12 @@ async function loadTeam() {
 
     const rankText = document.getElementById("rank-" + name);
     const rankImg = document.getElementById("ranking-" + name);
+    const rankName = player.rank.toLowerCase()
+
+        if(rankName.includes("bronze")) rankImg.classList.add("rank-bronze")
+        if(rankName.includes("silver")) rankImg.classList.add("rank-silver")
+        if(rankName.includes("gold")) rankImg.classList.add("rank-gold")
+        if(rankName.includes("diamond")) rankImg.classList.add("rank-diamond")
 
     if (rankText) {
       const rank = document.createElement("span");
@@ -54,6 +60,43 @@ async function loadTeam() {
 }
 
 loadTeam();
+
+async function loadStats(){
+
+  const res = await fetch("http://localhost:3000/stats")
+  const data = await res.json()
+
+  const container = document.getElementById("players_stats")
+
+  data.players.forEach((p,i)=>{
+
+    const div = document.createElement("div")
+
+    div.innerHTML = `
+      <h3>${i+1}. ${p.name}</h3>
+      <p>KDA: ${p.kda}</p>
+      <p>HS%: ${p.hs}</p>
+      <p>Main: ${p.main}</p>
+      <p>Last Match: ${p.lastMatch}</p>
+    `
+
+    container.appendChild(div)
+
+  })
+
+  const o = data.teamOverview
+
+  document.getElementById("team_overview").innerHTML = `
+    <h2>Team Overview</h2>
+    <p>MVP: ${o.mvp}</p>
+    <p>Highest KDA: ${o.highestKDA}</p>
+    <p>Most Headshots: ${o.mostHeadshots}</p>
+    <p>Most Wins: ${o.mostWins}</p>
+  `
+
+}
+
+loadStats()
 
 //rank imagens
 function getRankImage(rank) {
@@ -92,5 +135,5 @@ const rankValue = {
   "Immortal 1": 22,
   "Immortal 2": 23,
   "Immortal 3": 24,
-  Radiant: 25,
+"Radiant 1": 25,
 };
