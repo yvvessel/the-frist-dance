@@ -15,7 +15,7 @@ function getRankImage(rank){
 
   const name = rank.toLowerCase().replace(/\s+/g, "_") + "_Rank.png"
 
-  return `../../../../ranks/${name}`
+  return `./assets/images/ranks/${name}`
 }
 
 async function loadTeam() {
