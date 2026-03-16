@@ -90,14 +90,28 @@ app.get("/stats", async (req, res) => {
       )
 
       const accountData = await accountResponse.json()
-      const puuid = accountData.data.puuid
+      if(!accountData.data){
+  return {
+    name: player.name,
+    kda: 0,
+    hs: 0,
+    main: "Unknown",
+    lastMatch: "Unknown",
+    wins: 0
+  }
+}
+
+const puuid = accountData.data.puuid
 
       // pegar partidas
       const matchesResponse = await fetch(
-        `https://api.henrikdev.xyz/valorant/v3/by-puuid/matches/br/pc/${puuid}`,
-        { headers: { "Authorization": API_KEY } }
-      )
-
+  `https://api.henrikdev.xyz/valorant/v3/matches/br/pc/by-puuid/${puuid}`,
+  {
+    headers: {
+      Authorization: API_KEY
+    }
+  }
+)
       const matchesData = await matchesResponse.json()
 
       let kills = 0
@@ -109,32 +123,47 @@ app.get("/stats", async (req, res) => {
 
       const agentCount = {}
 
-      matchesData.data.forEach(match => {
+      if(!matchesData.data){
+  return {
+    name: player.name,
+    kda: 0,
+    hs: 0,
+    main: "Unknown",
+    lastMatch: "Unknown",
+    wins: 0
+  }
+}
 
-        const p = match.players.all_players.find(p => p.name === player.name)
+     matchesData.data.forEach(match => {
 
-        if(!p) return
+  if(!match.players || !match.players.all_players) return
 
-        kills += p.stats.kills
-        deaths += p.stats.deaths
-        assists += p.stats.assists
+  const p = match.players.all_players.find(p => p.puuid === puuid)
 
-        headshots += p.stats.headshots
-        shots += p.stats.bodyshots + p.stats.headshots + p.stats.legshots
+  if(!p) return
 
-        if(p.team === match.teams.red.has_won || p.team === match.teams.blue.has_won){
-          wins++
-        }
+  kills += p.stats.kills
+  deaths += p.stats.deaths
+  assists += p.stats.assists
 
-        const agent = p.character
-        agentCount[agent] = (agentCount[agent] || 0) + 1
+  headshots += p.stats.headshots
+  shots += p.stats.headshots + p.stats.bodyshots + p.stats.legshots
 
-      })
+  const agent = p.character
+  agentCount[agent] = (agentCount[agent] || 0) + 1
 
-      const kda = ((kills + assists) / deaths).toFixed(2)
+})
+
+      const kda = deaths === 0 ? (kills + assists) : ((kills + assists) / deaths)
       const hs = ((headshots / shots) * 100).toFixed(1)
 
-      const main = Object.keys(agentCount).reduce((a,b)=>agentCount[a]>agentCount[b]?a:b)
+      let main = "Unknown"
+
+if(Object.keys(agentCount).length > 0){
+  main = Object.keys(agentCount).reduce((a,b)=>
+    agentCount[a] > agentCount[b] ? a : b
+  )
+}
 
       const lastMatch = matchesData.data[0]?.metadata?.mode || "Unknown"
 

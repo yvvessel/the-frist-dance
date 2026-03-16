@@ -1,6 +1,3 @@
-document.getElementById("players_stats")
-document.getElementById("team_overview")
-
 async function loadStats(){
 
   const res = await fetch("http://localhost:3000/stats")
@@ -8,14 +5,17 @@ async function loadStats(){
 
   const container = document.getElementById("players_stats")
 
+  container.innerHTML = ""
+
   data.players.forEach((p,i)=>{
 
     const div = document.createElement("div")
+    div.classList.add("player_stat")
 
     div.innerHTML = `
       <h3>${i+1}. ${p.name}</h3>
-      <p>KDA: ${p.kda}</p>
-      <p>HS%: ${p.hs}</p>
+      <p>KDA: ${p.kda.toFixed(2)}</p>
+      <p>HS%: ${p.hs}%</p>
       <p>Main: ${p.main}</p>
       <p>Last Match: ${p.lastMatch}</p>
     `

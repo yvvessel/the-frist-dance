@@ -3,23 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+     <link
+      rel="icon"
+      href="/assets/images/thefristlogo.jpg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="/src/style/style.css" />
+    <link rel="stylesheet" href="/src/style/stats.css">
+    <title>Estatísticas</title>
 </head>
 <body>
-    <section>
+    <header>
+      <div class="container_head">
+        <a href="/src/index.html"
+          ><img
+            src="/assets/images/thefristlogo.jpg"
+            alt="logo The Frist Dance"
+            class="logo"
+        /></a>
 
-  <h1>Player Stats</h1>
+        <nav class="menu">
+          <ul>
+            <li><a href="/src/index.html">Início</a></li>
+            <li><a href="/src/pages/stats.html">Estatísticas</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-  <div id="players_stats"></div>
+    <h1>Player Stats</h1>
 
-</section>
+<section id="players_stats"></section>
 
-<section>
+<section id="team_overview"></section>
 
-  <div id="team_overview"></div>
-
-</section>
-
-<script src="/src/stats.js"></script>
+<script src="/src/js/stats.js"></script>
 </body>
 </html>

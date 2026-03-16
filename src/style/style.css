@@ -115,7 +115,7 @@ body {
 }
 
 .phoenix_card {
-  background-image: url("../assets/images/phoenix_card.jpg");
+  background-image: url("/assets/images/phoenix_card.jpg");
   background-size: cover;
   background-position: center;
   height: 100%;
@@ -123,7 +123,7 @@ body {
 }
 
 .clove_card {
-  background-image: url("../assets/images/clove_card.jpg");
+  background-image: url("/assets/images/clove_card.jpg");
   background-size: cover;
   background-position: center;
   height: 100%;
@@ -131,7 +131,7 @@ body {
 }
 
 .jett_card {
-  background-image: url("../assets/images/jett_card.jpg");
+  background-image: url("/assets/images/jett_card.jpg");
   background-size: cover;
   background-position: center;
   height: 100%;
@@ -139,7 +139,7 @@ body {
 }
 
 .viper_card {
-  background-image: url("../assets/images/viper_card.jpg");
+  background-image: url("/assets/images/viper_card.jpg");
   background-size: cover;
   background-position: center;
   height: 100%;
@@ -147,7 +147,7 @@ body {
 }
 
 .chamber_card {
-  background-image: url("../assets/images/chamber_card.jpg");
+  background-image: url("/assets/images/chamber_card.jpg");
   background-size: cover;
   background-position: center;
   height: 100%;
