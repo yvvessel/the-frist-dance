@@ -103,42 +103,31 @@ app.get("/stats", async (req, res) => {
 
 const puuid = accountData.data.puuid
 
-      // pegar partidas
-      const matchesResponse = await fetch(
-  `https://api.henrikdev.xyz/valorant/v3/matches/br/pc/by-puuid/${puuid}`,
+// adicionar aqui
+let kills = 0
+let deaths = 0
+let assists = 0
+let headshots = 0
+let shots = 0
+let wins = 0
+
+const agentCount = {}
+
+// pegar partidas
+const matchesResponse = await fetch(
+  `https://api.henrikdev.xyz/valorant/v3/matches/br/${encodeURIComponent(player.name)}/${player.tag}?size=10`,
   {
-    headers: {
-      Authorization: API_KEY
-    }
+    headers: { Authorization: API_KEY }
   }
 )
-      const matchesData = await matchesResponse.json()
 
-      let kills = 0
-      let deaths = 0
-      let assists = 0
-      let headshots = 0
-      let shots = 0
-      let wins = 0
+const matchesData = await matchesResponse.json()
 
-      const agentCount = {}
-
-      if(!matchesData.data){
-  return {
-    name: player.name,
-    kda: 0,
-    hs: 0,
-    main: "Unknown",
-    lastMatch: "Unknown",
-    wins: 0
-  }
-}
-
-     matchesData.data.forEach(match => {
+      matchesData.data.forEach(match => {
 
   if(!match.players || !match.players.all_players) return
 
-  const p = match.players.all_players.find(p => p.puuid === puuid)
+  const p = match.players.all_players.find(pl => pl.puuid === puuid)
 
   if(!p) return
 
@@ -149,13 +138,23 @@ const puuid = accountData.data.puuid
   headshots += p.stats.headshots
   shots += p.stats.headshots + p.stats.bodyshots + p.stats.legshots
 
+  // contar vitórias
+  const teamWon =
+    (p.team === "Red" && match.teams.red.has_won) ||
+    (p.team === "Blue" && match.teams.blue.has_won)
+
+  if(teamWon) wins++
+
+  // agente mais jogado
   const agent = p.character
   agentCount[agent] = (agentCount[agent] || 0) + 1
 
 })
 
+
+
       const kda = deaths === 0 ? (kills + assists) : ((kills + assists) / deaths)
-      const hs = ((headshots / shots) * 100).toFixed(1)
+      const hs = shots === 0 ? 0 : ((headshots / shots) * 100).toFixed(1)
 
       let main = "Unknown"
 
@@ -165,7 +164,11 @@ if(Object.keys(agentCount).length > 0){
   )
 }
 
-      const lastMatch = matchesData.data[0]?.metadata?.mode || "Unknown"
+      const lastRealMatch = matchesData.data.find(
+  m => m.metadata?.mode !== "Custom Game"
+)
+
+const lastMatch = lastRealMatch?.metadata?.mode || "Unknown"
 
       return {
         name: player.name,

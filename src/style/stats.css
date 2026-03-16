@@ -5,12 +5,89 @@
 
 h1 {
   text-align: center;
+  font-family: "Orbitron", sans-serif;
+  font-size: x-large;
 }
 
-.player_stat{
-  background: #1b1b1b;
-  padding: 20px;
-  margin: 10px 0;
-  border-radius: 10px;
+.playerstats {
+    margin-bottom: 10x
+}
+
+/* página */
+
+body {
+  background: #2c2d2e;
+  font-family: Arial, Helvetica, sans-serif;
   color: white;
+  margin: 0;
+}
+
+/* container principal */
+
+.stats_container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* titulo */
+
+.stats_title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+/* lista de players */
+
+#players_stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* card do player */
+
+.player_stat {
+  background: #1f2731;
+  border-radius: 10px;
+  padding: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.player_stat:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+/* nome */
+
+.player_stat h3 {
+  margin-top: 0;
+  color: #ff4655;
+}
+
+/* textos */
+
+.player_stat p {
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+/* team overview */
+
+#team_overview {
+  margin-top: 50px;
+  background: #2c2d2e;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+#team_overview h2 {
+  margin-top: 0;
+  color: #ff4655;
+}
+
+#team_overview p {
+  margin: 8px 0;
 }
