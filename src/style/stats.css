@@ -1,4 +1,4 @@
-.stats_container{
+.stats_container {
   width: 900px;
   margin: auto;
 }
@@ -10,7 +10,7 @@ h1 {
 }
 
 .playerstats {
-    margin-bottom: 10x
+  margin-bottom: 10x;
 }
 
 /* página */
@@ -52,12 +52,14 @@ body {
   background: #1f2731;
   border-radius: 10px;
   padding: 20px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .player_stat:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* nome */
@@ -96,7 +98,7 @@ body {
   text-align: center;
   padding: 0px 0;
   font-family: "Rajdhani", sans-serif;
-  color: rgb(255, 255, 255);  
+  color: rgb(255, 255, 255);
 }
 
 footer {
@@ -104,7 +106,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-
   .stats_container {
     width: 95%;
     padding: 20px 10px;
@@ -121,5 +122,4 @@ footer {
   .player_stat {
     padding: 15px;
   }
-
 }

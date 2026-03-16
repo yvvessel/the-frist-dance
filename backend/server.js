@@ -78,131 +78,123 @@ app.get("/team", async (req, res) => {
 
 //estatisticas
 app.get("/stats", async (req, res) => {
-
   try {
+    const results = await Promise.all(
+      players.map(async (player) => {
+        // pegar conta
+        const accountResponse = await fetch(
+          `https://api.henrikdev.xyz/valorant/v1/account/${encodeURIComponent(player.name)}/${player.tag}`,
+          { headers: { Authorization: API_KEY } },
+        );
 
-    const results = await Promise.all(players.map(async (player) => {
+        const accountData = await accountResponse.json();
+        if (!accountData.data) {
+          return {
+            name: player.name,
+            kda: 0,
+            hs: 0,
+            main: "Unknown",
+            lastMatch: "Unknown",
+            wins: 0,
+          };
+        }
 
-      // pegar conta
-      const accountResponse = await fetch(
-        `https://api.henrikdev.xyz/valorant/v1/account/${encodeURIComponent(player.name)}/${player.tag}`,
-        { headers: { "Authorization": API_KEY } }
-      )
+        const puuid = accountData.data.puuid;
 
-      const accountData = await accountResponse.json()
-      if(!accountData.data){
-  return {
-    name: player.name,
-    kda: 0,
-    hs: 0,
-    main: "Unknown",
-    lastMatch: "Unknown",
-    wins: 0
-  }
-}
+        // adicionar aqui
+        let kills = 0;
+        let deaths = 0;
+        let assists = 0;
+        let headshots = 0;
+        let shots = 0;
+        let wins = 0;
 
-const puuid = accountData.data.puuid
+        const agentCount = {};
 
-// adicionar aqui
-let kills = 0
-let deaths = 0
-let assists = 0
-let headshots = 0
-let shots = 0
-let wins = 0
+        // pegar partidas
+        const matchesResponse = await fetch(
+          `https://api.henrikdev.xyz/valorant/v3/matches/br/${encodeURIComponent(player.name)}/${player.tag}?size=10`,
+          {
+            headers: { Authorization: API_KEY },
+          },
+        );
 
-const agentCount = {}
+        const matchesData = await matchesResponse.json();
 
-// pegar partidas
-const matchesResponse = await fetch(
-  `https://api.henrikdev.xyz/valorant/v3/matches/br/${encodeURIComponent(player.name)}/${player.tag}?size=10`,
-  {
-    headers: { Authorization: API_KEY }
-  }
-)
+        matchesData.data.forEach((match) => {
+          if (!match.players || !match.players.all_players) return;
 
-const matchesData = await matchesResponse.json()
+          const p = match.players.all_players.find((pl) => pl.puuid === puuid);
 
-      matchesData.data.forEach(match => {
+          if (!p) return;
 
-  if(!match.players || !match.players.all_players) return
+          kills += p.stats.kills;
+          deaths += p.stats.deaths;
+          assists += p.stats.assists;
 
-  const p = match.players.all_players.find(pl => pl.puuid === puuid)
+          headshots += p.stats.headshots;
+          shots += p.stats.headshots + p.stats.bodyshots + p.stats.legshots;
 
-  if(!p) return
+          // contar vitórias
+          const teamWon =
+            (p.team === "Red" && match.teams.red.has_won) ||
+            (p.team === "Blue" && match.teams.blue.has_won);
 
-  kills += p.stats.kills
-  deaths += p.stats.deaths
-  assists += p.stats.assists
+          if (teamWon) wins++;
 
-  headshots += p.stats.headshots
-  shots += p.stats.headshots + p.stats.bodyshots + p.stats.legshots
+          // agente mais jogado
+          const agent = p.character;
+          agentCount[agent] = (agentCount[agent] || 0) + 1;
+        });
 
-  // contar vitórias
-  const teamWon =
-    (p.team === "Red" && match.teams.red.has_won) ||
-    (p.team === "Blue" && match.teams.blue.has_won)
+        const kda = deaths === 0 ? kills + assists : (kills + assists) / deaths;
+        const hs = shots === 0 ? 0 : ((headshots / shots) * 100).toFixed(1);
 
-  if(teamWon) wins++
+        let main = "Unknown";
 
-  // agente mais jogado
-  const agent = p.character
-  agentCount[agent] = (agentCount[agent] || 0) + 1
+        if (Object.keys(agentCount).length > 0) {
+          main = Object.keys(agentCount).reduce((a, b) =>
+            agentCount[a] > agentCount[b] ? a : b,
+          );
+        }
 
-})
+        const lastRealMatch = matchesData.data.find(
+          (m) => m.metadata?.mode !== "Custom Game",
+        );
 
+        const lastMatch = lastRealMatch?.metadata?.mode || "Unknown";
 
-
-      const kda = deaths === 0 ? (kills + assists) : ((kills + assists) / deaths)
-      const hs = shots === 0 ? 0 : ((headshots / shots) * 100).toFixed(1)
-
-      let main = "Unknown"
-
-if(Object.keys(agentCount).length > 0){
-  main = Object.keys(agentCount).reduce((a,b)=>
-    agentCount[a] > agentCount[b] ? a : b
-  )
-}
-
-      const lastRealMatch = matchesData.data.find(
-  m => m.metadata?.mode !== "Custom Game"
-)
-
-const lastMatch = lastRealMatch?.metadata?.mode || "Unknown"
-
-      return {
-        name: player.name,
-        kda: Number(kda),
-        hs: Number(hs),
-        main: main,
-        lastMatch: lastMatch,
-        wins: wins
-      }
-
-    }))
+        return {
+          name: player.name,
+          kda: Number(kda),
+          hs: Number(hs),
+          main: main,
+          lastMatch: lastMatch,
+          wins: wins,
+        };
+      }),
+    );
 
     // ordenar por KDA
-    results.sort((a,b)=> b.kda - a.kda)
+    results.sort((a, b) => b.kda - a.kda);
 
     // team overview
     const overview = {
       mvp: results[0].name,
-      highestKDA: results.reduce((a,b)=>a.kda>b.kda?a:b).name,
-      mostHeadshots: results.reduce((a,b)=>a.hs>b.hs?a:b).name,
-      mostWins: results.reduce((a,b)=>a.wins>b.wins?a:b).name
-    }
+      highestKDA: results.reduce((a, b) => (a.kda > b.kda ? a : b)).name,
+      mostHeadshots: results.reduce((a, b) => (a.hs > b.hs ? a : b)).name,
+      mostWins: results.reduce((a, b) => (a.wins > b.wins ? a : b)).name,
+    };
 
     res.json({
       players: results,
-      teamOverview: overview
-    })
-
-  } catch(err){
-    console.error(err)
-    res.status(500).json({error:"Erro ao gerar stats"})
+      teamOverview: overview,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Erro ao gerar stats" });
   }
-
-})
+});
 
 app.listen(3000, () => {
   console.log("Servidor rodando na porta 3000");
