@@ -1,5 +1,5 @@
 async function loadStats() {
-  const res = await fetch("http://localhost:3000/stats");
+  const res = await fetch("/api/team");
   const data = await res.json();
 
   const container = document.getElementById("players_stats");
