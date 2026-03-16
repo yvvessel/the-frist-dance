@@ -68,6 +68,11 @@ body {
     rgb(26, 25, 25) 100%
   );
 }
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 /* players cards */
 .players_container {
@@ -161,23 +166,81 @@ body {
   transition: filter 0.3s;
 }
 
-.rank-bronze {
-  filter: drop-shadow(0 0 8px #cd7f32);
+
+
+.footer_base {
+  text-align: center;
+  padding: 0px 0;
+  font-family: "Rajdhani", sans-serif;
+  color: rgb(0, 0, 0);  
 }
 
-.rank-silver {
-  filter: drop-shadow(0 0 8px #c0c0c0);
+footer {
+  margin-top: auto;
 }
 
-.rank-gold {
-  filter: drop-shadow(0 0 8px #ffd700);
+
+@media (max-width: 768px) {
+
+  /* header */
+
+  .container_head{
+    flex-direction: column;
+    height: auto;
+    padding: 10px 0;
+  }
+
+  /* titulo */
+
+  .overlay{
+    padding-top: 140px;
+    margin-left: 0;
+    font-size: 20px;
+  }
+
+  /* players layout */
+
+  .players_container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 30px 20px;
+  justify-items: center;
 }
 
-.rank-diamond {
-  filter: drop-shadow(0 0 8px #6a43c7);
+  /* cards */
+
+  .player_card{
+  width: 140px;
+  height: auto;
 }
 
-.rank-ascendant {
-  filter: drop-shadow(0 0 8px #7eff72);
+  .player_card section{
+  width: 100%;
+  height: 180px;
+  border-radius: 10px;
 }
 
+  .player_card_mvp{
+    width: 130px;
+    height: auto;
+    transform: none;
+  }
+
+  /* texto */
+
+  .player_card p{
+  font-size: 13px;
+  text-align: center;
+}
+
+  /* rank */
+
+  .rank_logo{
+    width: 32px;
+  }
+
+  footer{
+  margin-top: 40px;
+}
+}
