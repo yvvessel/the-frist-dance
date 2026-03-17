@@ -46,7 +46,6 @@ export default async function handler(req, res) {
       })
     );
     console.log("API_KEY:", API_KEY);
-    console.log(mmrData);
     res.status(200).json(results);
 
   } catch (err) {
