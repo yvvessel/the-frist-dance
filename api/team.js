@@ -11,31 +11,12 @@ export default async function handler(req, res) {
   ];
 
   try {
+
     const results = await Promise.all(
       players.map(async (player) => {
 
-        const accountResponse = await fetch(
-  `https://api.henrikdev.xyz/valorant/v1/account/${encodeURIComponent(player.name)}/${player.tag}`,
-  {
-    headers: {
-      Authorization: API_KEY
-    }
-  }
-);
-
-const accountData = await accountResponse.json();
-
-console.log("ACCOUNT DATA:", player.name, accountData);
-
-        if (!accountData.data) {
-          console.log("ACCOUNT FAIL:", player.name, accountData);
-          return { name: player.name, rank: "Unranked", rr: 0 };
-        }
-
-        const puuid = accountData.data.puuid;
-
-        const mmrResponse = await fetch(
-          `https://api.henrikdev.xyz/valorant/v3/by-puuid/mmr/br/pc/${puuid}`,
+        const response = await fetch(
+          `https://api.henrikdev.xyz/valorant/v2/mmr/br/${encodeURIComponent(player.name)}/${player.tag}`,
           {
             headers: {
               Authorization: API_KEY
@@ -43,20 +24,22 @@ console.log("ACCOUNT DATA:", player.name, accountData);
           }
         );
 
-        const mmrData = await mmrResponse.json();
+        const data = await response.json();
 
         return {
           name: player.name,
-          rank: mmrData?.data?.current_data?.currenttierpatched || "Unranked",
-          rr: mmrData?.data?.current_data?.ranking_in_tier || 0
+          rank: data?.data?.current_data?.currenttierpatched || "Unranked",
+          rr: data?.data?.current_data?.ranking_in_tier || 0
         };
+
       })
     );
-    
+
     res.status(200).json(results);
 
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Erro ao buscar team" });
   }
+
 }
