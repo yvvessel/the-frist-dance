@@ -40,8 +40,8 @@ export default async function handler(req, res) {
 
         return {
           name: player.name,
-          rank: mmrData?.data?.current?.tier?.name || "Unranked",
-          rr: mmrData?.data?.current?.rr || 0
+          rank: mmrData?.data?.current_data?.currenttierpatched || "Unranked",
+          rr: mmrData?.data?.current_data?.ranking_in_tier || 0
         };
       })
     );
