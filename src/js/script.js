@@ -9,13 +9,11 @@ const rankValue = {
   Ascendant: 7,
   Immortal: 8,
   Radiant: 9
-}
+};
 
-function getRankImage(rank){
-
-  const name = rank.toLowerCase().replace(/\s+/g, "_") + "_Rank.png"
-
-  return `/assets/images/ranks/${name}`
+function getRankImage(rank) {
+  const name = rank.toLowerCase().replace(/\s+/g, "_") + "_Rank.png";
+  return `/assets/images/ranks/${name}`;
 }
 
 async function loadTeam() {
@@ -39,7 +37,6 @@ async function loadTeam() {
       mvp = player;
     }
   });
-}
 
   players.forEach((player) => {
     const name = player.name.toLowerCase().replace(/\s+/g, "");
@@ -71,7 +68,7 @@ async function loadTeam() {
 
     mvpCard.classList.add("player_card_mvp");
   }
-
+}
 
 loadTeam();
 
