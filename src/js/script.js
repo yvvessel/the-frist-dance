@@ -19,7 +19,7 @@ function getRankImage(rank){
 }
 
 async function loadTeam() {
-  const response = await fetch("http://localhost:3000/team");
+  const response = await fetch("api/team");
   const players = await response.json();
 
   const container = document.querySelector(".players_container");
