@@ -22,6 +22,11 @@ async function loadTeam() {
   const response = await fetch("/api/team");
   const players = await response.json();
 
+  if (!Array.isArray(players)) {
+    console.error("API retornou erro:", players);
+    return;
+  }
+
   const container = document.querySelector(".players_container");
 
   let mvp = players[0];
@@ -34,6 +39,7 @@ async function loadTeam() {
       mvp = player;
     }
   });
+}
 
   players.forEach((player) => {
     const name = player.name.toLowerCase().replace(/\s+/g, "");
