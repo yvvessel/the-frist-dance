@@ -15,15 +15,17 @@ export default async function handler(req, res) {
       players.map(async (player) => {
 
         const accountResponse = await fetch(
-          `https://api.henrikdev.xyz/valorant/v1/account/${encodeURIComponent(player.name)}/${player.tag}`,
-          {
-            headers: {
-              Authorization: API_KEY
-            }
-          }
-        );
+  `https://api.henrikdev.xyz/valorant/v1/account/${encodeURIComponent(player.name)}/${player.tag}`,
+  {
+    headers: {
+      Authorization: API_KEY
+    }
+  }
+);
 
-        const accountData = await accountResponse.json();
+const accountData = await accountResponse.json();
+
+console.log("ACCOUNT DATA:", player.name, accountData);
 
         if (!accountData.data) {
           console.log("ACCOUNT FAIL:", player.name, accountData);
@@ -50,7 +52,7 @@ export default async function handler(req, res) {
         };
       })
     );
-
+    console.log("API KEY:", process.env.API_KEY);
     res.status(200).json(results);
 
   } catch (err) {
