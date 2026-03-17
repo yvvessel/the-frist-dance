@@ -178,7 +178,7 @@ footer {
 }
 
 
-/* Header mobile 
+/* Header mobile */
 @media (max-width: 768px) {
   .container_head {
     flex-direction: column;
@@ -238,35 +238,6 @@ footer {
       0 0 10px rgb(197, 156, 44),
       0 0 25px rgb(197, 156, 44);
   }
-  .player_card {
-  width: 150px;
-  height: 400px;
-  position: relative;
-}
-
-
-.player_card_inner {
-  width: 100%;
-  height: 100%;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-
-.player_card_mvp .player_card_inner {
-  transform: scale(1.15);
-  z-index: 2;
-  box-shadow:
-    0 0 15px rgb(197, 156, 44),
-    0 0 35px rgb(197, 156, 44);
-  border-radius: 8px;
-  border: 2px solid transparent;
-}
-
-
-.player_card:hover .player_card_inner {
-  transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-}
 
   .rank_logo {
     width: 30px;
