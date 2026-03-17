@@ -269,6 +269,9 @@ footer {
     width: 100%;
   }
 
+  .chamber_card {
+    margin-bottom: 20px;
+  }
   .menu ul {
     padding: 0;
     margin: 0;
