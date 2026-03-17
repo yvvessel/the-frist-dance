@@ -1,3 +1,23 @@
+/* RESET */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  background: radial-gradient(
+    circle,
+    rgb(255, 255, 255) 0%,
+    rgb(26, 25, 25) 100%
+  );
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
 header {
   position: fixed;
   width: 100%;
@@ -5,92 +25,69 @@ header {
 }
 
 .container_head {
-  top: 0;
   height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 5%;
-  height: 80px;
 }
 
 .logo {
-  justify-content: left;
-  height: auto;
   width: 50px;
   border-radius: 50%;
 }
 
-.overlay {
-  text-align: center;
-  position: relative;
-  padding-top: 120px;
-  margin-left: 5%;
-  font-family: "Orbitron", sans-serif;
-  font-size: x-large;
-  color: rgba(0, 0, 0, 0.822);
-}
-
-nav li {
-  display: inline-block;
-  margin-right: 17px;
-  text-decoration: none;
-}
-
+/* MENU */
 .menu {
-  list-style: none;
   display: flex;
-  padding: 14px 16px;
-  font-size: 17px;
-  float: right;
-  color: rgb(255, 255, 255);
+}
+
+.menu ul {
+  display: flex;
+  gap: 17px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 header .menu a {
-  display: inline-block;
   text-decoration: none;
-  margin-right: 17px;
-  list-style: none;
   font-size: 17px;
   font-family: "Rajdhani", sans-serif;
   color: rgb(0, 0, 0);
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  scroll-behavior: smooth;
-  background: #f0e4e8;
-  background: radial-gradient(
-    circle,
-    rgb(255, 255, 255) 0%,
-    rgb(26, 25, 25) 100%
-  );
-}
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* BANNER */
+.overlay {
+  text-align: center;
+  padding-top: 120px;
+  font-family: "Orbitron", sans-serif;
+  font-size: x-large;
+  color: rgba(0, 0, 0, 0.822);
 }
 
-/* players cards */
+/* PLAYERS */
 .players_container {
   display: flex;
   justify-content: center;
   align-items: flex-end;
   gap: 15px;
+  margin-top: 40px;
 }
 
+/* CARD */
 .player_card {
   height: 400px;
   width: 150px;
-  background-size: cover;
-  background-position: center;
   text-align: center;
   font-family: "Rajdhani", sans-serif;
   font-weight: 600;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.player_card_inner {
+  width: 100%;
+  height: 100%;
 }
 
 .player_card:hover {
@@ -98,175 +95,100 @@ body {
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 
+/* MVP */
 .player_card_mvp {
   height: 420px;
   width: 170px;
   transform: scale(1.15);
   z-index: 2;
-  margin-left: 2px;
   border-radius: 8px;
-  border: 2px solid transparent;
-
   box-shadow:
     0 0 15px rgb(197, 156, 44),
     0 0 35px rgb(197, 156, 44);
 }
 
-.player_card_mvp section {
-  border-radius: 8px;
-  box-shadow:
-    0 0 15px rgba(197, 156, 44, 0.8),
-    0 0 35px rgba(197, 156, 44, 0.6);
-}
-
-.phoenix_card {
-  background-image: url("/assets/images/phoenix_card.jpg");
-  background-size: cover;
-  background-position: center;
+/* IMAGENS DOS AGENTES */
+.player_card section {
   height: 100%;
   width: 100%;
+  border-radius: 8px;
+}
+
+/* AGENTS */
+.phoenix_card {
+  background: url("/assets/images/phoenix_card.jpg") center/cover no-repeat;
 }
 
 .clove_card {
-  background-image: url("/assets/images/clove_card.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100%;
-  width: 100%;
+  background: url("/assets/images/clove_card.jpg") center/cover no-repeat;
 }
 
 .jett_card {
-  background-image: url("/assets/images/jett_card.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100%;
-  width: 100%;
+  background: url("/assets/images/jett_card.jpg") center/cover no-repeat;
 }
 
 .viper_card {
-  background-image: url("/assets/images/viper_card.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100%;
-  width: 100%;
+  background: url("/assets/images/viper_card.jpg") center/cover no-repeat;
 }
 
 .chamber_card {
-  background-image: url("/assets/images/chamber_card.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100%;
-  width: 100%;
+  background: url("/assets/images/chamber_card.jpg") center/cover no-repeat;
 }
 
-/* ranks */
+/* RANK */
 .rank_logo {
-  height: auto;
   width: 50px;
-  transition: filter 0.3s;
 }
 
-.footer_base {
-  text-align: center;
-  padding: 0px 0;
-  font-family: "Rajdhani", sans-serif;
-  color: rgb(0, 0, 0);  
-}
-
+/* FOOTER */
 footer {
   margin-top: auto;
 }
 
+.footer_base {
+  text-align: center;
+  font-family: "Rajdhani", sans-serif;
+  color: rgb(0, 0, 0);
+}
 
-/* Header mobile */
+/* ================= MOBILE ================= */
+
+/* TABLET */
 @media (max-width: 768px) {
   .container_head {
     flex-direction: column;
-    align-items: center;
     gap: 10px;
   }
 
-  .menu {
+  .menu ul {
     flex-direction: column;
-    padding: 0;
+    align-items: center;
   }
 
-  .menu li {
-    margin: 8px 0;
-  }
-
-  header .menu a {
-    font-size: 14px;
-  }
-
-  .logo {
-    width: 30px;
-    height: auto;
-  }
-}
-
-@media (max-width: 768px) {
   .overlay {
     padding-top: 80px;
     font-size: 18px;
-    margin-left: 0;
-    text-align: center;
   }
 }
 
+/* CELULAR */
 @media (max-width: 480px) {
   .players_container {
-    grid-template-columns: 1fr;
-    gap: 15px;
-    padding: 15px 10px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
 
   .player_card {
     width: 90%;
-    height: auto;
-  }
-
-  .player_card section {
-    height: 180px;
+    height: 300px;
   }
 
   .player_card_mvp {
     width: 95%;
-    height: auto;
+    height: 320px;
     transform: none;
-    box-shadow:
-      0 0 10px rgb(197, 156, 44),
-      0 0 25px rgb(197, 156, 44);
   }
-  .player_card {
-  width: 150px;
-  height: 400px;
-  position: relative;
-}
-
-
-.player_card_inner {
-  width: 100%;
-  height: 100%;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-
-.player_card_mvp .player_card_inner {
-  transform: scale(1.15);
-  z-index: 2;
-  box-shadow:
-    0 0 15px rgb(197, 156, 44),
-    0 0 35px rgb(197, 156, 44);
-  border-radius: 8px;
-  border: 2px solid transparent;
-}
-
-
-.player_card:hover .player_card_inner {
-  transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-}
 
   .rank_logo {
     width: 30px;
@@ -275,55 +197,12 @@ footer {
   .player_card p {
     font-size: 12px;
   }
-}
 
-@media (max-width: 480px) {
   .overlay h1 {
-    font-size: 1.8rem; 
-    line-height: 1.2;
-    margin-bottom: 15px;
+    font-size: 1.8rem;
   }
-}
 
-@media (max-width: 480px) {
   .logo {
     width: 45px;
-    margin-bottom: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .menu {
-    justify-content: center;
-    width: 100%;
-  }
-
-  .chamber_card {
-    margin-bottom: 20px;
-  }
-  .menu ul {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  .menu li {
-    margin: 0;
-  }
-
-  .menu a {
-    font-size: 14px;
-    font-weight: 700;
-  }
-}
-
-@media (max-width: 480px) {
-  
-
-  .player_card:nth-last-child(-n+2) {
-
-    justify-self: center;
   }
 }
