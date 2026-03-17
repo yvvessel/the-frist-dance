@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     const results = await Promise.all(
       players.map(async (player) => {
         try {
-          // 🔹 ACCOUNT
+          
           const accountResponse = await fetch(
             `https://api.henrikdev.xyz/valorant/v1/account/${encodeURIComponent(player.name)}/${player.tag}`,
             { headers: { Authorization: API_KEY } }
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
 
           const puuid = accountData.data.puuid;
 
-          // 🔹 MATCHES
+          
           const matchesResponse = await fetch(
             `https://api.henrikdev.xyz/valorant/v3/matches/br/${encodeURIComponent(player.name)}/${player.tag}?size=20`,
             { headers: { Authorization: API_KEY } }
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
 
           const matches = matchesData?.data || [];
 
-          // 🔥 apenas competitivo
+          
           const competitiveMatches = matches.filter(
             (m) => m.metadata?.mode === "Competitive"
           );
