@@ -76,11 +76,9 @@ body {
 
 /* players cards */
 .players_container {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 150px; /* largura padrão dos cards */
+  display: flex;
   justify-content: center;
-  align-items: end;
+  align-items: flex-end;
   gap: 15px;
 }
 
@@ -93,7 +91,6 @@ body {
   font-family: "Rajdhani", sans-serif;
   font-weight: 600;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  /* Remover transform no hover para mobile */
 }
 
 .player_card:hover {
@@ -102,13 +99,14 @@ body {
 }
 
 .player_card_mvp {
-  grid-column: span 1.13; /* um pouco maior que 1, ajusta largura */
   height: 420px;
   width: 170px;
-  transform: none; /* melhor evitar escala que atrapalha o grid */
+  transform: scale(1.15);
+  z-index: 2;
   margin-left: 2px;
   border-radius: 8px;
   border: 2px solid transparent;
+
   box-shadow:
     0 0 15px rgb(197, 156, 44),
     0 0 35px rgb(197, 156, 44);
@@ -180,14 +178,7 @@ footer {
 }
 
 
-/* mobile */
-@media (hover: none) {
-  .player_card:hover {
-    transform: none;
-    box-shadow: none;
-  }
-}
-
+/* Header mobile */
 @media (max-width: 768px) {
   .container_head {
     flex-direction: column;
@@ -277,6 +268,10 @@ footer {
     justify-content: center;
     width: 100%;
   }
+
+  .chamber_card {
+    margin-bottom: 20px;
+  }
   .menu ul {
     padding: 0;
     margin: 0;
@@ -292,24 +287,6 @@ footer {
   .menu a {
     font-size: 14px;
     font-weight: 700;
-  }
-}
-
-@media (max-width: 480px) {
-  .players_container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
-    padding: 15px 10px;
-    justify-items: center;
-  }
-
-  .player_card,
-  .player_card_mvp {
-    width: 90%;
-    height: auto;
-    transform: none !important;
-    grid-column: auto !important;
   }
 }
 
