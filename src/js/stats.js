@@ -14,8 +14,8 @@ async function loadStats() {
       <h3>${i + 1}. ${p.name}</h3>
       <p>KDA: ${p.kda.toFixed(2)}</p>
       <p>HS%: ${p.hs}%</p>
-      <p>Main: ${p.main}</p>
-      <p>Last Match: ${p.lastMatch}</p>
+      <p>Ultimo Agente: ${p.main}</p>
+      <p>Ultima partida: ${p.lastMatch}</p>
     `;
 
     container.appendChild(div);
@@ -26,9 +26,9 @@ async function loadStats() {
   document.getElementById("team_overview").innerHTML = `
     <h2>Team Overview</h2>
     <p>MVP: ${o.mvp}</p>
-    <p>Highest KDA: ${o.highestKDA}</p>
-    <p>Most Headshots: ${o.mostHeadshots}</p>
-    <p>Most Wins: ${o.mostWins}</p>
+    <p>Maior KDA: ${o.highestKDA}</p>
+    <p>Mais Headshots: ${o.mostHeadshots}</p>
+    <p>Mais Vitórias: ${o.mostWins}</p>
   `;
 }
 
