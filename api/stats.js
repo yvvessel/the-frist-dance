@@ -74,8 +74,7 @@ export default async function handler(req, res) {
           agentCount[agent] = (agentCount[agent] || 0) + 1;
         });
 
-       const kd = deaths === 0 ? kills : kills / deaths;
-       const kda = deaths === 0 ? kills + assists : (kills + assists) / deaths;
+        const kda = deaths === 0 ? kills + assists : (kills + assists) / deaths;
         const hs = shots === 0 ? 0 : ((headshots / shots) * 100).toFixed(1);
 
         let main = "Unknown";
@@ -85,17 +84,9 @@ export default async function handler(req, res) {
           );
         }
 
-        const competitiveMatches = (matchesData.data || []).filter(
-  m => m.metadata?.mode === "Competitive"
-);
-
-competitiveMatches.forEach((match) => {
-
-  if (!match.players || !match.players.all_players) return;
-
-  const p = match.players.all_players.find(pl => pl.puuid === puuid);
-  if (!p) return;
-});
+        const lastRealMatch = matchesData.data.find(
+          m => m.metadata?.mode !== "Custom Game"
+        );
 
         return {
           name: player.name,
