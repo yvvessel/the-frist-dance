@@ -1,3 +1,20 @@
+.stats_container {
+  width: 900px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Orbitron", sans-serif;
+  font-size: x-large;
+}
+
+.playerstats {
+  margin-bottom: 10x;
+}
+
+/* página */
+
 body {
   background: #2c2d2e;
   font-family: Arial, Helvetica, sans-serif;
@@ -5,30 +22,39 @@ body {
   margin: 0;
 }
 
+/* container principal */
+
 .stats_container {
   max-width: 1100px;
   margin: auto;
   padding: 40px 20px;
 }
 
-h1 {
+/* titulo */
+
+.stats_title {
   text-align: center;
-  font-family: "Orbitron", sans-serif;
-  font-size: 2rem;
+  font-size: 32px;
+  margin-bottom: 40px;
 }
+
+/* lista de players */
 
 #players_stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
-  margin-bottom: 30px;
 }
+
+/* card do player */
 
 .player_stat {
   background: #1f2731;
   border-radius: 10px;
   padding: 20px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .player_stat:hover {
@@ -36,15 +62,21 @@ h1 {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
 
+/* nome */
+
 .player_stat h3 {
   margin-top: 0;
   color: #ff4655;
 }
 
+/* textos */
+
 .player_stat p {
   margin: 6px 0;
   font-size: 14px;
 }
+
+/* team overview */
 
 #team_overview {
   margin-top: 50px;
@@ -62,8 +94,17 @@ h1 {
   margin: 8px 0;
 }
 
-/* ========================= */
-/* RESPONSIVIDADE */
+.footer_base {
+  text-align: center;
+  padding: 0px 0;
+  font-family: "Rajdhani", sans-serif;
+  color: rgb(255, 255, 255);
+}
+
+footer {
+  margin-top: auto;
+}
+
 @media (max-width: 768px) {
   .stats_container {
     width: 95%;
@@ -71,27 +112,19 @@ h1 {
   }
 
   h1 {
-    font-size: 1.5rem;
+    font-size: 22px;
   }
 
   #players_stats {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .player_stat {
     padding: 15px;
   }
-
-  #team_overview {
-    padding: 20px;
-  }
 }
 
 @media (max-width: 480px) {
-  h1 {
-    font-size: 1.2rem;
-  }
-
   #players_stats {
     grid-template-columns: 1fr;
     gap: 15px;
@@ -103,5 +136,16 @@ h1 {
 
   #team_overview {
     padding: 15px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer_base {
+    font-size: 12px;
+    padding: 10px 5px;
   }
 }
