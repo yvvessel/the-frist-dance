@@ -38,8 +38,8 @@ console.log("ACCOUNT DATA:", player.name, accountData);
           `https://api.henrikdev.xyz/valorant/v3/by-puuid/mmr/br/pc/${puuid}`,
           {
             headers: {
-              Authorization: API_KEY
-            }
+  Authorization: `Bearer ${API_KEY}`
+}
           }
         );
 
@@ -52,7 +52,7 @@ console.log("ACCOUNT DATA:", player.name, accountData);
         };
       })
     );
-    
+    console.log(puuid)
     res.status(200).json(results);
 
   } catch (err) {
