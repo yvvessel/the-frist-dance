@@ -178,67 +178,72 @@ footer {
 }
 
 
+/* Header mobile */
 @media (max-width: 768px) {
-
-  /* header */
-
-  .container_head{
+  .container_head {
     flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .menu {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .menu li {
+    margin: 8px 0;
+  }
+
+  header .menu a {
+    font-size: 14px;
+  }
+
+  .logo {
+    width: 60px;
     height: auto;
-    padding: 10px 0;
   }
+}
 
-  /* titulo */
-
-  .overlay{
-    padding-top: 140px;
+@media (max-width: 768px) {
+  .overlay {
+    padding-top: 80px;
+    font-size: 18px;
     margin-left: 0;
-    font-size: 20px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .players_container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 15px 10px;
   }
 
-  /* players layout */
+  .player_card {
+    width: 90%;
+    height: auto;
+  }
 
-  .players_container{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  padding: 30px 20px;
-  justify-items: center;
-}
+  .player_card section {
+    height: 180px;
+  }
 
-  /* cards */
-
-  .player_card{
-  width: 140px;
-  height: auto;
-}
-
-  .player_card section{
-  width: 100%;
-  height: 180px;
-  border-radius: 10px;
-}
-
-  .player_card_mvp{
-    width: 130px;
+  .player_card_mvp {
+    width: 95%;
     height: auto;
     transform: none;
+    box-shadow:
+      0 0 10px rgb(197, 156, 44),
+      0 0 25px rgb(197, 156, 44);
   }
 
-  /* texto */
-
-  .player_card p{
-  font-size: 13px;
-  text-align: center;
-}
-
-  /* rank */
-
-  .rank_logo{
-    width: 32px;
+  .rank_logo {
+    width: 30px;
   }
 
-  footer{
-  margin-top: 40px;
-}
+  .player_card p {
+    font-size: 12px;
+  }
 }
