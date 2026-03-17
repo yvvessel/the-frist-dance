@@ -1,4 +1,3 @@
-/* RESET */
 html,
 body {
   margin: 0;
@@ -114,81 +113,154 @@ header .menu a {
   border-radius: 8px;
 }
 
-/* AGENTS */
 .phoenix_card {
-  background: url("/assets/images/phoenix_card.jpg") center/cover no-repeat;
+  background-image: url("/assets/images/phoenix_card.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
 }
 
 .clove_card {
-  background: url("/assets/images/clove_card.jpg") center/cover no-repeat;
+  background-image: url("/assets/images/clove_card.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
 }
 
 .jett_card {
-  background: url("/assets/images/jett_card.jpg") center/cover no-repeat;
+  background-image: url("/assets/images/jett_card.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
 }
 
 .viper_card {
-  background: url("/assets/images/viper_card.jpg") center/cover no-repeat;
+  background-image: url("/assets/images/viper_card.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
 }
 
 .chamber_card {
-  background: url("/assets/images/chamber_card.jpg") center/cover no-repeat;
+  background-image: url("/assets/images/chamber_card.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
 }
 
-/* RANK */
+/* ranks */
 .rank_logo {
+  height: auto;
   width: 50px;
-}
-
-/* FOOTER */
-footer {
-  margin-top: auto;
+  transition: filter 0.3s;
 }
 
 .footer_base {
   text-align: center;
+  padding: 0px 0;
   font-family: "Rajdhani", sans-serif;
-  color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);  
 }
 
-/* ================= MOBILE ================= */
+footer {
+  margin-top: auto;
+}
 
-/* TABLET */
+
+/* Header mobile 
 @media (max-width: 768px) {
   .container_head {
     flex-direction: column;
+    align-items: center;
     gap: 10px;
   }
 
-  .menu ul {
+  .menu {
     flex-direction: column;
-    align-items: center;
+    padding: 0;
   }
 
-  .overlay {
-    padding-top: 80px;
-    font-size: 18px;
+  .menu li {
+    margin: 8px 0;
+  }
+
+  header .menu a {
+    font-size: 14px;
+  }
+
+  .logo {
+    width: 30px;
+    height: auto;
   }
 }
 
-/* CELULAR */
+@media (max-width: 768px) {
+  .overlay {
+    padding-top: 80px;
+    font-size: 18px;
+    margin-left: 0;
+    text-align: center;
+  }
+}
+
 @media (max-width: 480px) {
   .players_container {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 15px 10px;
   }
 
   .player_card {
     width: 90%;
-    height: 300px;
+    height: auto;
+  }
+
+  .player_card section {
+    height: 180px;
   }
 
   .player_card_mvp {
     width: 95%;
-    height: 320px;
+    height: auto;
     transform: none;
+    box-shadow:
+      0 0 10px rgb(197, 156, 44),
+      0 0 25px rgb(197, 156, 44);
   }
+  .player_card {
+  width: 150px;
+  height: 400px;
+  position: relative;
+}
+
+
+.player_card_inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+.player_card_mvp .player_card_inner {
+  transform: scale(1.15);
+  z-index: 2;
+  box-shadow:
+    0 0 15px rgb(197, 156, 44),
+    0 0 35px rgb(197, 156, 44);
+  border-radius: 8px;
+  border: 2px solid transparent;
+}
+
+
+.player_card:hover .player_card_inner {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
 
   .rank_logo {
     width: 30px;
@@ -197,12 +269,55 @@ footer {
   .player_card p {
     font-size: 12px;
   }
+}
 
+@media (max-width: 480px) {
   .overlay h1 {
-    font-size: 1.8rem;
+    font-size: 1.8rem; 
+    line-height: 1.2;
+    margin-bottom: 15px;
   }
+}
 
+@media (max-width: 480px) {
   .logo {
     width: 45px;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .chamber_card {
+    margin-bottom: 20px;
+  }
+  .menu ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .menu li {
+    margin: 0;
+  }
+
+  .menu a {
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+@media (max-width: 480px) {
+  
+
+  .player_card:nth-last-child(-n+2) {
+
+    justify-self: center;
   }
 }
