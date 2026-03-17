@@ -45,7 +45,6 @@ export default async function handler(req, res) {
         };
       })
     );
-    console.log("MMR DATA:", mmrData);
     res.status(200).json(results);
 
   } catch (err) {
