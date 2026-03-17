@@ -52,7 +52,7 @@ console.log("ACCOUNT DATA:", player.name, accountData);
         };
       })
     );
-    console.log("API KEY:", process.env.API_KEY);
+    
     res.status(200).json(results);
 
   } catch (err) {
