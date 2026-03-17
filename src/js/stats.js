@@ -29,7 +29,7 @@ async function loadStats() {
     <h2>Team Overview</h2>
     <p>MVP: ${o.mvp}</p>
     <p>Maior KDA: ${o.highestKDA}</p>
-    <p>Pior Headshots: ${o.mostHeadshots}</p>
+    <p>Mais Headshots: ${o.mostHeadshots}</p>
     <p>Mais Vitórias: ${o.mostWins}</p>
   `;
 }
