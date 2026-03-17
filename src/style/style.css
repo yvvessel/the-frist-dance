@@ -200,7 +200,7 @@ footer {
   }
 
   .logo {
-    width: 60px;
+    width: 30px;
     height: auto;
   }
 }
@@ -245,5 +245,63 @@ footer {
 
   .player_card p {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay h1 {
+    font-size: 1.8rem; 
+    line-height: 1.2;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    width: 45px;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .menu ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .menu li {
+    margin: 0;
+  }
+
+  .menu a {
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+@media (max-width: 480px) {
+  .players_container {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 15px;
+    padding: 15px 10px;
+    justify-items: center;
+  }
+
+  .player_card {
+    width: 90%;
+    height: auto;
+  }
+  .player_card:nth-last-child(-n+2) {
+
+    justify-self: center;
   }
 }
