@@ -11,12 +11,14 @@ async function loadStats() {
     div.classList.add("player_stat");
 
     div.innerHTML = `
-      <h3>${i + 1}. ${p.name}</h3>
-      <p>KDA: ${p.kda.toFixed(2)}</p>
-      <p>HS%: ${p.hs}%</p>
-      <p>Ultimo Agente: ${p.main}</p>
-      <p>Ultima partida: ${p.lastMatch}</p>
-    `;
+  <h3>${i + 1}. ${p.name}</h3>
+  <p>KDA: ${p.kda.toFixed(2)}</p>
+  <p>HS%: ${p.hs}%</p>
+  <p>Winrate: ${p.winrate}%</p>
+  <p>Partidas: ${p.matches}</p>
+  <p>Main Agent: ${p.main}</p>
+  <p>Modo: ${p.lastMatch}</p>
+`;
 
     container.appendChild(div);
   });

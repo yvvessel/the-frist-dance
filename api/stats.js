@@ -27,9 +27,9 @@ export default async function handler(req, res) {
 
           const puuid = accountData.data.puuid;
 
-          // 🔹 MATCHES
+          // 🔹 MATCHES (pega mais pra filtrar depois)
           const matchesResponse = await fetch(
-            `https://api.henrikdev.xyz/valorant/v3/matches/br/${encodeURIComponent(player.name)}/${player.tag}?size=20`,
+            `https://api.henrikdev.xyz/valorant/v3/matches/br/${encodeURIComponent(player.name)}/${player.tag}?size=50`,
             { headers: { Authorization: API_KEY } }
           );
 
@@ -37,10 +37,10 @@ export default async function handler(req, res) {
 
           const matches = matchesData?.data || [];
 
-          // ✅ apenas competitivo
-          const competitiveMatches = matches.filter(
-            (m) => m.metadata?.mode === "Competitive"
-          );
+          // ✅ SOMENTE COMPETITIVO + LIMITE 20
+          const competitiveMatches = matches
+            .filter((m) => m.metadata?.mode === "Competitive")
+            .slice(0, 20);
 
           if (competitiveMatches.length === 0) {
             return fallbackPlayer(player.name);
@@ -85,27 +85,23 @@ export default async function handler(req, res) {
 
           const totalMatches = competitiveMatches.length;
 
-          // ✅ KDA padrão (simples e confiável)
+          // ✅ KDA padrão
           const kda =
             deaths === 0 ? kills + assists : (kills + assists) / deaths;
 
-          // ✅ HS correto (padrão real)
+          // ✅ HS correto
           const hs = shots === 0 ? 0 : (headshots / shots) * 100;
 
           // ✅ Winrate
           const winrate = (wins / totalMatches) * 100;
 
-          // ✅ Main agent (mais jogado)
+          // ✅ Main agent
           let main = "Unknown";
           if (Object.keys(agentCount).length > 0) {
             main = Object.keys(agentCount).reduce((a, b) =>
               agentCount[a] > agentCount[b] ? a : b
             );
           }
-
-          // ✅ Última partida competitiva
-          const lastMatch =
-            competitiveMatches[0]?.metadata?.mode || "Unknown";
 
           return {
             name: player.name,
@@ -115,7 +111,7 @@ export default async function handler(req, res) {
             wins,
             matches: totalMatches,
             main,
-            lastMatch,
+            lastMatch: "Competitive",
           };
         } catch (err) {
           console.error("Erro player:", player.name, err);
@@ -124,7 +120,7 @@ export default async function handler(req, res) {
       })
     );
 
-    // ✅ ordenar por KDA (coerente com UI)
+    // ✅ ordena por KDA
     results.sort((a, b) => b.kda - a.kda);
 
     const overview = {
