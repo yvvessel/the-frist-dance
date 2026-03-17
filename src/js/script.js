@@ -71,7 +71,7 @@ async function loadTeam() {
 
     mvpCard.classList.add("player_card_mvp");
   }
-}
+
 
 loadTeam();
 
