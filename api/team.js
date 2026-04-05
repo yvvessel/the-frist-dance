@@ -3,7 +3,7 @@ export default async function handler(req, res) {
   const API_KEY = process.env.API_KEY;
 
   const players = [
-    { name: "Xanxes", tag: "SCCP" },
+    { name: "手机断电", tag: "777" },
     { name: "Ferazor", tag: "BR1" },
     { name: "yvv", tag: "YSL" },
     { name: "tinyrick", tag: "7248" },
