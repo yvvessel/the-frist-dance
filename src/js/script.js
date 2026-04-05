@@ -29,14 +29,14 @@ async function loadTeam() {
 
   let mvp = players[0];
 
-  players.forEach((player) => {
-    const currentRank = rankValue[player.rank] || 0;
-    const bestRank = rankValue[mvp.rank] || 0;
+ players.forEach((player) => {
+  const currentRank = rankValue[player.rank.split(" ")[0]] || 0;
+  const bestRank = rankValue[mvp.rank.split(" ")[0]] || 0;
 
-    if (currentRank > bestRank) {
-      mvp = player;
-    }
-  });
+  if (currentRank > bestRank) {
+    mvp = player;
+  }
+});
 
   players.forEach((player) => {
     const name = player.name.toLowerCase().replace(/\s+/g, "");
