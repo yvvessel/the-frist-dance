@@ -11,7 +11,7 @@ const rankValue = {
   Radiant: 9
 };
 
-// normalizar nome (resolve bug com espaço + caracteres especiais)
+// normalizar nome 
 function normalizeName(name) {
   return name
     .toLowerCase()
@@ -37,7 +37,7 @@ async function loadTeam() {
 
     const container = document.querySelector(".players_container");
 
-    // ✅ DEFINE MVP corretamente
+    //  DEFINE MVP corretamente
     let mvp = players[0];
 
     players.forEach((player) => {
@@ -65,7 +65,7 @@ async function loadTeam() {
       }
     });
 
-    // ✅ DESTACA MVP
+    //DESTACA MVP
     const mvpCard = document.querySelector(
       `[data-player="${mvp.name}"]`
     );
@@ -85,7 +85,7 @@ async function loadTeam() {
   }
 }
 
-// ✅ GARANTE QUE O DOM CARREGOU
+
 document.addEventListener("DOMContentLoaded", loadTeam);
 
 // ano automático
