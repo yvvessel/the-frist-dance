@@ -22,12 +22,12 @@ export default async function handler(req, res) {
           const accountData = await accountRes.json();
 
           if (!accountData?.data?.puuid) {
-            return createEmptyPlayer(player.name);
+            return empty(player.name);
           }
 
           const puuid = accountData.data.puuid;
 
-          // buscar partidas (paginação)
+          // buscar partidas
           let allMatches = [];
           let cursor = null;
 
@@ -37,7 +37,6 @@ export default async function handler(req, res) {
             );
 
             url.searchParams.append("size", "10");
-
             if (cursor) url.searchParams.append("cursor", cursor);
 
             const response = await fetch(url, {
@@ -59,13 +58,12 @@ export default async function handler(req, res) {
             .filter(m => m.metadata?.mode === "Competitive")
             .slice(0, 20);
 
-          // stats base
           let kills = 0, deaths = 0, assists = 0;
           let headshots = 0, shots = 0, wins = 0;
 
           const agentCount = {};
 
-          matches.forEach((match) => {
+          matches.forEach(match => {
             const p = match.players?.all_players?.find(pl => pl.puuid === puuid);
             if (!p) return;
 
@@ -82,25 +80,16 @@ export default async function handler(req, res) {
 
             if (won) wins++;
 
-            const agent = p.character;
-            agentCount[agent] = (agentCount[agent] || 0) + 1;
+            agentCount[p.character] = (agentCount[p.character] || 0) + 1;
           });
 
           const matchCount = matches.length;
 
-          const kda = deaths === 0
-            ? kills + assists
-            : (kills + assists) / deaths;
+          const kda = deaths === 0 ? kills + assists : (kills + assists) / deaths;
+          const hs = shots === 0 ? 0 : (headshots / shots) * 100;
+          const winrate = matchCount === 0 ? 0 : (wins / matchCount) * 100;
 
-          const hs = shots === 0
-            ? 0
-            : (headshots / shots) * 100;
-
-          const winrate = matchCount === 0
-            ? 0
-            : (wins / matchCount) * 100;
-
-          // agente mais usado
+          // agente principal
           let main = "Unknown";
           if (Object.keys(agentCount).length) {
             main = Object.keys(agentCount).reduce((a, b) =>
@@ -119,8 +108,9 @@ export default async function handler(req, res) {
             winrate: Number(winrate.toFixed(1))
           };
 
-        } catch {
-          return createEmptyPlayer(player.name);
+        } catch (err) {
+          console.log("erro player:", player.name);
+          return empty(player.name);
         }
       })
     );
@@ -128,11 +118,14 @@ export default async function handler(req, res) {
     // ordenar por KDA
     results.sort((a, b) => b.kda - a.kda);
 
+    // evitar crash em reduce
+    const safeReduce = (arr, fn) => arr.length ? arr.reduce(fn) : { name: "N/A" };
+
     const overview = {
       mvp: results[0]?.name || "N/A",
       highestKDA: results[0]?.name || "N/A",
-      mostHeadshots: results.reduce((a, b) => (a.hs > b.hs ? a : b)).name,
-      mostWins: results.reduce((a, b) => (a.wins > b.wins ? a : b)).name,
+      mostHeadshots: safeReduce(results, (a, b) => a.hs > b.hs ? a : b).name,
+      mostWins: safeReduce(results, (a, b) => a.wins > b.wins ? a : b).name,
     };
 
     res.status(200).json({
@@ -140,13 +133,14 @@ export default async function handler(req, res) {
       teamOverview: overview,
     });
 
-  } catch {
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ error: "Erro ao gerar stats" });
   }
 }
 
 // fallback
-function createEmptyPlayer(name) {
+function empty(name) {
   return {
     name,
     kda: 0,
