@@ -27,7 +27,7 @@ async function loadTeam() {
 
   const container = document.querySelector(".players_container");
 
-  let mvp = players[0];
+  const baseRank = player.rank.split(" ")[0];
 
  players.forEach((player) => {
   const currentRank = rankValue[player.rank.split(" ")[0]] || 0;
