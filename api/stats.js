@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   const players = [
     { name: "手机断电", tag: "777" },
     { name: "Ferazor", tag: "BR1" },
-    { name: "yvv", tag: "YSL" },
+    { name: "yvv", tag: "B4EM" },
     { name: "tinyrick", tag: "7248" },
     { name: "T1n Doll", tag: "4328" },
   ];
