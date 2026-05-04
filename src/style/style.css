@@ -160,6 +160,14 @@ body {
   width: 100%;
 }
 
+.miks_card {
+  background-image: url("/assets/images/miks_card.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+}
+
 /* ranks */
 .rank_logo {
   height: auto;
