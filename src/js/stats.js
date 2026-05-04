@@ -8,7 +8,7 @@ async function loadStats() {
 
     container.innerHTML = "";
 
-    // render players
+    // players
     data.players.forEach((p, i) => {
       const div = document.createElement("div");
       div.classList.add("player_stat");
@@ -45,4 +45,5 @@ async function loadStats() {
   }
 }
 
+// rodar após carregar DOM
 document.addEventListener("DOMContentLoaded", loadStats);
