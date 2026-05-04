@@ -29,7 +29,9 @@ async function loadTeam() {
 
   const baseRank = player.rank.split(" ")[0];
 
- players.forEach((player) => {
+let mvp = players[0];
+
+players.forEach((player) => {
   const currentRank = rankValue[player.rank.split(" ")[0]] || 0;
   const bestRank = rankValue[mvp.rank.split(" ")[0]] || 0;
 
